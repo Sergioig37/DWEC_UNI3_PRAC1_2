@@ -1,7 +1,7 @@
-const palabrasPosibles = ["Avión", "Mando", "Cabeza", "Teclado", "Barco"];
+const palabrasPosibles = ["COHETE", "HUARACÁN", "MANDO", "TECLADO", "BARCO", "PIEZA", "SARTÉN", "BAÑO", "BOTELLA", "TENEDOR"];
 export default class PalabraOculta{
     constructor(){
-        this._palabra = palabrasPosibles[Math.random()*palabrasPosibles.length];
+        this._palabra = palabrasPosibles[Math.floor(Math.random()*palabrasPosibles.length)];
         this._palabraInversa = "";
         this._caracteresPalabra = new Array();
     }
