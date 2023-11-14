@@ -1,4 +1,4 @@
-const palabrasPosibles = ["COHETE", "HUARACÁN", "MANDO", "TECLADO", "BARCO", "PIEZA", "SARTÉN", "BAÑO", "BOTELLA", "TENEDOR"];
+const palabrasPosibles = ["COHETE", "HURACÁN", "MANDO", "TECLADO", "BARCO", "PIEZA", "SARTÉN", "BAÑO", "BOTELLA", "TENEDOR"];
 export default class PalabraOculta{
     constructor(){
         this._palabra = palabrasPosibles[Math.floor(Math.random()*palabrasPosibles.length)];
@@ -28,6 +28,7 @@ export default class PalabraOculta{
     }
 
     revolverLetras(){
+        this._palabraInversa = "";
         this._caracteresPalabra.sort(() => Math.random() - 0.5);;
         for(let i=0;i<this._caracteresPalabra.length;i++){
             this._palabraInversa += this._caracteresPalabra[i];
@@ -36,5 +37,16 @@ export default class PalabraOculta{
 
     pillarNuevaPalabra(){
         this._palabra = palabrasPosibles[Math.random()*palabrasPosibles.length];
+    }
+    generarNuevaPalabra(){
+        var nuevaPalabra = palabrasPosibles[Math.floor(Math.random()*palabrasPosibles.length)];
+        this._caracteresPalabra = new Array();
+        if(this._palabra===nuevaPalabra){
+            while(this._palabra===nuevaPalabra){
+                nuevaPalabra = palabrasPosibles[Math.floor(Math.random()*palabrasPosibles.length)];
+            }
+        }
+        this._palabra = nuevaPalabra;
+
     }
 }
