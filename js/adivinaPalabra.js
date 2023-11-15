@@ -4,6 +4,8 @@ export default class PalabraOculta{
         this._palabra = palabrasPosibles[Math.floor(Math.random()*palabrasPosibles.length)];
         this._palabraInversa = "";
         this._caracteresPalabra = new Array();
+        this._numeroAciertos = 0;
+        this._numeroIntentos = 0;
     }
 
     get Palabra(){
@@ -19,6 +21,19 @@ export default class PalabraOculta{
     set PalabraInversa(palabraInversa){
         this._palabraInversa = palabraInversa;
     }
+    get NumeroAciertos(){
+        return this._numeroAciertos;
+    }
+    get NumeroIntentos(){
+        return this._numeroIntentos;
+    }
+    set NumeroAciertos(numeroAciertos){
+         this._numeroAciertos = numeroAciertos;
+    }
+    set NumeroIntentos(numeroIntentos){
+         this._numeroIntentos = numeroIntentos;
+    }
+
 
 
     addCaracteres(){
@@ -47,6 +62,12 @@ export default class PalabraOculta{
             }
         }
         this._palabra = nuevaPalabra;
+    }
 
+    sumarAcierto(){
+        this._numeroAciertos +=1;
+    }
+    sumarIntento(){
+        this._numeroIntentos +=1;
     }
 }
