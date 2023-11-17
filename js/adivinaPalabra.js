@@ -1,6 +1,6 @@
 const palabrasSeisLetras = ["ESCUDO", "ABETO", "BONDAD", "BROMAS", "DIOSES", "EVITAR", "FILTRO", "PERROS", "SILLAS", "GARRAS"];
 const palabrasCuatroLetras = ["LAGO", "SOLA","TREN","PALO","VINO", "CAJA","MANO",  "PICO","LEÓN","UÑAS"];
-const palabrasOchoLetras = ["ALEMANES", "ADAPTADO", "CABLEADO"," CALCINAR","DECORADO","DICTADOR","EXCESIVO","FABULOSO","GABINETE","HECHIZAR"];
+const palabrasOchoLetras = ["ALEMANES", "ADAPTADO", "CABLEADO","CALCINAR","DECORADO","DICTADOR","EXCESIVO","FABULOSO","GABINETE","HECHIZAR"];
 
 
 
@@ -9,7 +9,7 @@ export default class PalabraOculta {
         this._dificultad = 4;
         switch(this._dificultad){
             case(4): 
-                this._palabra = palabrasCuatroLetras;[Math.floor(Math.random() * palabrasCuatroLetras.length)];
+                this._palabra = palabrasCuatroLetras[Math.floor(Math.random() * palabrasCuatroLetras.length)];
                 break;
             case(6):
                this._palabra =  palabrasSeisLetras[Math.floor(Math.random() * palabrasSeisLetras.length)];

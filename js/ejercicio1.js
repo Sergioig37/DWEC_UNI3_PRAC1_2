@@ -10,14 +10,15 @@ const porcentajeIntentos = document.getElementById("porcentaje");
 const botonNuevaPalabra = document.getElementById("nueva");
 const botonSolucion = document.getElementById("solucion");
 const botonFinalizar = document.getElementById("finalizar");
+const selectorDificultad = document.getElementsByName("dificultad");
 
 palabra.addCaracteres();
 palabra.revolverLetras();
  letrasInversas.value = palabra.PalabraInversa;
 
-function generarNuevaPalabra(evento) {
-   
-    var elemento = evento.target;
+function generarNuevaPalabra() {
+
+    palabra.cambiarDificultad(parseInt(verDificultad()));
     limpiarInput(palabraInput);
     limpiarInput(letrasInversas);
     prepararPalabra();
@@ -25,7 +26,7 @@ function generarNuevaPalabra(evento) {
     hacerInvisible(aciertoPalabra)
     letrasInversas.value = palabra.PalabraInversa;
     botonSolucion.disabled = false;
-    elemento.disabled = true;
+    botonNuevaPalabra.disabled = true;
     resultadoFinal.innerHTML = "";
 
 }
@@ -108,11 +109,23 @@ function hacerInvisible(elemento){
     elemento.style.visibility = "hidden";
 }
 
+function verDificultad(){
+    var dificultad = 0;
+    var i=0;
+    var valorEncontrado = false;
+    while(i<selectorDificultad.length&&valorEncontrado == false){
+        if(selectorDificultad[i].checked==true){
+            dificultad = selectorDificultad[i].value;
+            valorEncontrado=true;
+        }
+        i +=1;
+    }
+    return dificultad;
+}
+
 function init() {
     document.getElementById("palabra").addEventListener("blur", palabraAction, false);
     document.getElementById("nueva").addEventListener("click", generarNuevaPalabra, false);
     document.getElementById("finalizar").addEventListener("click", finalizarPartida, false);
     document.getElementById("solucion").addEventListener("click", mostrarSolucion, false);
-
-
 }
