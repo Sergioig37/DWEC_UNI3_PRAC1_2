@@ -11,6 +11,10 @@
 	width:400px;
 }
 
+.dificultadLinea{
+	display: flex;
+}
+
 #formulario .linea_formulario label{
 	float:left;
 	width:30%;

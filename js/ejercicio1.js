@@ -14,7 +14,7 @@ const selectorDificultad = document.getElementsByName("dificultad");
 
 palabra.addCaracteres();
 palabra.revolverLetras();
- letrasInversas.value = palabra.PalabraInversa;
+letrasInversas.value = palabra.PalabraInversa;
 
 function generarNuevaPalabra() {
 
@@ -31,11 +31,11 @@ function generarNuevaPalabra() {
 
 }
 
-function limpiarInput(evento){
+function limpiarInput(evento) {
     evento.value = "";
 }
 
-function prepararPalabra(){
+function prepararPalabra() {
 
     palabra.generarNuevaPalabra();
 
@@ -51,43 +51,48 @@ function palabraMayus(evento) {
 }
 
 
-function palabraAction(evento){
+function palabraAction(evento) {
     palabraMayus(evento);
     comprobarPalabra(evento);
 
-} 
+}
 
 function comprobarPalabra(evento) {
-        var intentos = 0;
-        if (adivinada(evento.target.value, palabra.Palabra) == true) {
-            botonNuevaPalabra.disabled= false;
-            aciertoPalabra.innerHTML = "Enhorabuena, has acertado la palabra"
-            palabra.sumarAcierto();
-            palabra.sumarIntento();
-            hacerVisible(aciertoPalabra);
-            botonSolucion.disabled = true;
-        }
-        else{
-            palabra.sumarIntento();
-        }
+    var intentos = 0;
+    if (adivinada(evento.target.value, palabra.Palabra) == true) {
+        botonNuevaPalabra.disabled = false;
+        aciertoPalabra.innerHTML = "Enhorabuena, has acertado la palabra"
+        palabra.sumarAcierto();
+        palabra.sumarIntento();
+        hacerVisible(aciertoPalabra);
+        botonSolucion.disabled = true;
+    }
+    else {
+        palabra.sumarIntento();
+    }
 }
 
 
 function finalizarPartida() {
-    var porcentajeAciertos = (palabra.NumeroAciertos/palabra.NumeroIntentos) * 100;
-    botonNuevaPalabra.disabled =true;
-    botonSolucion.disabled = true;
-    botonFinalizar.disabled = true;
+    if (palabra.NumeroIntentos === 0) {
+        porcentajeIntentos.innerHTML += "No se ha intentado ni una vez";
+    }
+    else {
+        var porcentajeAciertos = (palabra.NumeroAciertos / palabra.NumeroIntentos) * 100;
+        porcentajeIntentos.innerHTML += " " + porcentajeAciertos + "%";
+
+    }
     hacerVisible(porcentajeIntentos);
     hacerInvisible(aciertoPalabra);
     hacerInvisible(solucionPalabra);
-    porcentajeIntentos.style.visibility = "visible";
-    porcentajeIntentos.innerHTML +=  " "+ porcentajeAciertos +"%";
+    botonNuevaPalabra.disabled = true;
+    botonSolucion.disabled = true;
+    botonFinalizar.disabled = true;
     hacerInvisible(resultadoFinal);
 }
 
-function mostrarSolucion(){
-    botonNuevaPalabra.disabled =false;
+function mostrarSolucion() {
+    botonNuevaPalabra.disabled = false;
     botonSolucion.disabled = true;
     hacerVisible(solucionPalabra);
     solucionPalabra.innerHTML = "La solución es " + palabra.Palabra;
@@ -101,24 +106,24 @@ function adivinada(palabra, palabraOculta) {
     return false;
 }
 
-function hacerVisible(elemento){
+function hacerVisible(elemento) {
     elemento.style.visibility = "visible";
 }
 
-function hacerInvisible(elemento){
+function hacerInvisible(elemento) {
     elemento.style.visibility = "hidden";
 }
 
-function verDificultad(){
+function verDificultad() {
     var dificultad = 0;
-    var i=0;
+    var i = 0;
     var valorEncontrado = false;
-    while(i<selectorDificultad.length&&valorEncontrado == false){
-        if(selectorDificultad[i].checked==true){
+    while (i < selectorDificultad.length && valorEncontrado == false) {
+        if (selectorDificultad[i].checked == true) {
             dificultad = selectorDificultad[i].value;
-            valorEncontrado=true;
+            valorEncontrado = true;
         }
-        i +=1;
+        i += 1;
     }
     return dificultad;
 }

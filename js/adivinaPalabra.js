@@ -1,21 +1,21 @@
-const palabrasSeisLetras = ["ESCUDO", "ABETO", "BONDAD", "BROMAS", "DIOSES", "EVITAR", "FILTRO", "PERROS", "SILLAS", "GARRAS"];
-const palabrasCuatroLetras = ["LAGO", "SOLA","TREN","PALO","VINO", "CAJA","MANO",  "PICO","LEÓN","UÑAS"];
-const palabrasOchoLetras = ["ALEMANES", "ADAPTADO", "CABLEADO","CALCINAR","DECORADO","DICTADOR","EXCESIVO","FABULOSO","GABINETE","HECHIZAR"];
 
-
+const matrizPalabras = [["LAGO", "SOLA", "TREN", "PALO", "VINO", "CAJA", "MANO", "PICO", "LEÓN", "UÑAS"],
+["ESCUDO", "ABETO", "BONDAD", "BROMAS", "DIOSES", "EVITAR", "FILTRO", "PERROS", "SILLAS", "GARRAS"],
+["ALEMANES", "ADAPTADO", "CABLEADO", "CALCINAR", "DECORADO", "DICTADOR", "EXCESIVO", "FABULOSO", "GABINETE", "HECHIZAR"]]
 
 export default class PalabraOculta {
     constructor() {
         this._dificultad = 4;
-        switch(this._dificultad){
-            case(4): 
-                this._palabra = palabrasCuatroLetras[Math.floor(Math.random() * palabrasCuatroLetras.length)];
+
+        switch (this._dificultad) {
+            case (4):
+                this._palabra = matrizPalabras[0][Math.floor(Math.random() * 10)];;
                 break;
-            case(6):
-               this._palabra =  palabrasSeisLetras[Math.floor(Math.random() * palabrasSeisLetras.length)];
+            case (6):
+                this._palabra = matrizPalabras[1][Math.floor(Math.random() * 10)];;
                 break;
-            case(8):
-               this._palabra = palabrasOchoLetras[Math.floor(Math.random() * palabrasOchoLetras.length)];
+            case (8):
+                this._palabra = matrizPalabras[2][Math.floor(Math.random() * 10)];;
                 break;
         }
         this._palabraInversa = "";
@@ -49,10 +49,10 @@ export default class PalabraOculta {
     set NumeroIntentos(numeroIntentos) {
         this._numeroIntentos = numeroIntentos;
     }
-    get Dificultad(){
+    get Dificultad() {
         return this._dificultad;
     }
-    set Dificultad(nuevaDificultad){
+    set Dificultad(nuevaDificultad) {
         this._dificultad = nuevaDificultad;
     }
 
@@ -72,31 +72,42 @@ export default class PalabraOculta {
         }
     }
 
-    pillarNuevaPalabra() {
-        this._palabra = palabrasPosibles[Math.random() * palabrasPosibles.length];
-    }
     generarNuevaPalabra() {
-        
+
         var listaPalabras = new Array();
-        switch(this._dificultad){
-            case(4): 
-                listaPalabras = palabrasCuatroLetras;
+        var nuevaPalabra;
+        switch (this._dificultad) {
+            case (4):
+                nuevaPalabra = matrizPalabras[0][Math.floor(Math.random() * 10)];
+                this._caracteresPalabra = new Array();
+                if (this._palabra === nuevaPalabra) {
+                    while (this._palabra === nuevaPalabra) {
+                        nuevaPalabra = matrizPalabras[0][Math.floor(Math.random() * 10)];
+                    }
+                }
+                this._palabra = nuevaPalabra;
                 break;
-            case(6):
-                listaPalabras =  palabrasSeisLetras;
+            case (6):
+                nuevaPalabra = matrizPalabras[1][Math.floor(Math.random() * 10)];
+                this._caracteresPalabra = new Array();
+                if (this._palabra === nuevaPalabra) {
+                    while (this._palabra === nuevaPalabra) {
+                        nuevaPalabra = matrizPalabras[1][Math.floor(Math.random() * 10)];
+                    }
+                }
+                this._palabra = nuevaPalabra;
                 break;
-            case(8):
-                listaPalabras = palabrasOchoLetras;
+            case (8):
+                nuevaPalabra = matrizPalabras[2][Math.floor(Math.random() * 10)];
+                this._caracteresPalabra = new Array();
+                if (this._palabra === nuevaPalabra) {
+                    while (this._palabra === nuevaPalabra) {
+                        nuevaPalabra = matrizPalabras[2][Math.floor(Math.random() * 10)];
+                    }
+                }
+                this._palabra = nuevaPalabra;
                 break;
         }
-        var nuevaPalabra = listaPalabras[Math.floor(Math.random() * listaPalabras.length)];
-        this._caracteresPalabra = new Array();
-        if (this._palabra === nuevaPalabra) {
-            while (this._palabra === nuevaPalabra) {
-                nuevaPalabra =listaPalabras[Math.floor(Math.random() * listaPalabras.length)];
-            }
-        }
-        this._palabra = nuevaPalabra;
     }
 
     sumarAcierto() {
@@ -105,7 +116,7 @@ export default class PalabraOculta {
     sumarIntento() {
         this._numeroIntentos += 1;
     }
-    cambiarDificultad(nuevaDificultad){
+    cambiarDificultad(nuevaDificultad) {
         this._dificultad = nuevaDificultad;
     }
 }
